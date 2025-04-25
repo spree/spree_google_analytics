@@ -2,10 +2,11 @@
   <script>
     if (window.gtag) {
       <% safely do %>
-        gtag('set', { user_id: "<%= @order.reload.user_id %>" });
         <% if @order.user.present? %>
+          gtag('set', { user_id: "<%= @order.reload.user_id %>" });
           gtag('set', <%= google_analytics_user_properties_json(@order.user) %>);
         <% end %>
+
         gtag('event', 'add_payment_info', <%= google_analytics_payment_json %>);
         gtag('event', 'purchase', <%= google_analytics_purchase_json %>);
       <% end %>
