@@ -8,18 +8,12 @@
       <% end %>
 
       <%= preference_field(@integration, form, 'measurement_id', i18n_scope: 'admin.integrations.google_analytics') %>
-      <p class="mb-4 mt-n2">
+      <p class="mb-0 mt-n2">
         <%= link_to 'https://support.google.com/analytics/answer/12270356', target: "_blank", class: 'btn btn-link' do %>
           Where to find my Measurement ID?
           <%= icon('external-link', class: 'ml-2 mr-0') %>
         <% end %>
       </p>
-
-      <%= preference_field(@integration, form, 'api_secret', i18n_scope: 'admin.integrations.google_analytics') %>
-      <div class="alert alert-info mt-n2 mb-0">
-        To create a new secret, navigate in the Google Analytics UI to
-        <strong>Admin > Data Streams > choose your stream > Measurement Protocol > Create</strong>
-      </div>
     </div>
   </div>
 </div>
