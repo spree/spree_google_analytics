@@ -1,16 +1,3 @@
-# == Schema Information
-#
-# Table name: spree_integrations
-#
-#  id          :bigint           not null, primary key
-#  active      :boolean          default(FALSE), not null
-#  preferences :text
-#  type        :string           not null
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  project_id  :bigint           not null
-#  store_id    :bigint           not null
-#
 module Spree
   module Integrations
     class GoogleAnalytics < Spree::Integration

@@ -20,7 +20,11 @@
     gtag('js', new Date());
     GA_MEASUREMENT_ID = "<%= store_integration('google_analytics').preferred_measurement_id %>";
 
-    gtag('config', "<%= store_integration('google_analytics').preferred_measurement_id %>", { "debug_mode": true });
+    <% if ENV['GA_DEBUG_MODE'].present? %>
+      gtag('config', GA_MEASUREMENT_ID, { "debug_mode": true });
+    <% else %>
+      gtag('config', GA_MEASUREMENT_ID);
+    <% end %>
 
     <% if try_spree_current_user %>
       gtag('set', { "user_id": "<%= try_spree_current_user.id %>" });
