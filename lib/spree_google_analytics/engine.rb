@@ -13,6 +13,10 @@ module SpreeGoogleAnalytics
       SpreeGoogleAnalytics::Config = SpreeGoogleAnalytics::Configuration.new
     end
 
+    initializer 'spree_google_analytics.assets' do |app|
+      app.config.assets.precompile += %w[spree_google_analytics_manifest]
+    end
+
     def self.activate
       Dir.glob(File.join(File.dirname(__FILE__), '../../app/**/*_decorator*.rb')) do |c|
         Rails.configuration.cache_classes ? require(c) : load(c)
