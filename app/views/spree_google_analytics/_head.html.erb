@@ -1,0 +1,34 @@
+<% if store_integration('google_analytics').present? %>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=<%= store_integration('google_analytics').preferred_measurement_id %>"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+
+    <% if defined?(store_integration('cookie_first')) && store_integration('cookie_first').present? %>
+      gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'analytics_storage': 'denied',
+      'functionality_storage': 'denied',
+      'security_storage': 'granted',
+      'wait_for_update': 2000
+      });
+    <% end %>
+
+    gtag('js', new Date());
+    GA_MEASUREMENT_ID = "<%= store_integration('google_analytics').preferred_measurement_id %>";
+
+    <% if ENV['GA_DEBUG_MODE'].present? %>
+      gtag('config', GA_MEASUREMENT_ID, { "debug_mode": true });
+    <% else %>
+      gtag('config', GA_MEASUREMENT_ID);
+    <% end %>
+
+    <% if try_spree_current_user %>
+      gtag('set', 'user_id', "<%= try_spree_current_user.id %>");
+      gtag('set', 'user_properties', <%= google_analytics_user_properties_json(try_spree_current_user) %>);
+    <% end %>
+  </script>
+<% end %>

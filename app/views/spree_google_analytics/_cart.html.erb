@@ -1,0 +1,11 @@
+<% if store_integration('google_analytics').present? %>
+  <script>
+    if (window.gtag) {
+      <% if @order.present? && @line_items.any? %>
+        window.addEventListener('slideover:open', () => {
+          gtag('event', 'view_cart', <%= google_analytics_checkout_json %>);
+        })
+      <% end %>
+    }
+  </script>
+<% end %>

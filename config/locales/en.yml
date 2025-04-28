@@ -1,5 +1,10 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
+---
 en:
-  hello: "Hello world"
+  spree:
+    admin:
+      integrations:
+        google_analytics:
+          description: Google Analytics 4 is a powerful tool that helps businesses understand and analyze their website and app data.
+          reports_warning: It can take up to 48 hours for the data to appear in standard reports
+          measurement_id: Measurement ID
+          api_secret: API Secret

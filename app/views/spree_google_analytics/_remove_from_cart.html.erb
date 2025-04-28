@@ -1,0 +1,9 @@
+<% if store_integration('google_analytics').present? %>
+  <script>
+    if (window.gtag) {
+      <% safely do %>
+        gtag('event', 'remove_from_cart', <%= google_analytics_cart_event_json(@line_item, @line_item.quantity, nil) %>);
+      <% end %>
+    }
+  </script>
+<% end %>

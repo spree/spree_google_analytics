@@ -1,0 +1,9 @@
+<% if store_integration('google_analytics').present? && @wished_item&.variant.present? %>
+  <script>
+    if (window.gtag) {
+      <% safely do %>
+        gtag('event', 'add_to_wishlist', <%= google_analytics_add_to_wishlist_event_json(@wished_item.variant) %>);
+      <% end %>
+    }
+  </script>
+<% end %>
