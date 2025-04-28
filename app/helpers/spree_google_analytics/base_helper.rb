@@ -15,7 +15,9 @@ module SpreeGoogleAnalytics
 
       {
         sign_in_count: user.sign_in_count,
-        created_at: user.created_at&.iso8601.to_s
+        created_at: user.created_at&.iso8601.to_s,
+        completed_orders_count: user.orders.complete.count,
+        completed_orders_total: user.orders.complete.sum(:total).to_f
       }.to_json.html_safe
     end
 

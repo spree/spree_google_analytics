@@ -132,7 +132,9 @@ RSpec.describe Spree::CheckoutController do
     let(:user_properties_event_data) do
       {
         'sign_in_count' => order.user.sign_in_count,
-        'created_at' => order.user.created_at.iso8601
+        'created_at' => order.user.created_at.iso8601,
+        'completed_orders_count' => order.user.orders.complete.count,
+        'completed_orders_total' => order.user.orders.complete.sum(:total).to_f
       }
     end
 
