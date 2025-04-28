@@ -13,7 +13,10 @@ module SpreeGoogleAnalytics
     def google_analytics_user_properties_json(user)
       return unless user.present?
 
-      { user_properties: SpreeGoogleAnalytics::UserPresenter.new(user: user).call }.to_json.html_safe
+      {
+        sign_in_count: user.sign_in_count,
+        created_at: user.created_at&.iso8601.to_s
+      }.to_json.html_safe
     end
 
     def google_analytics_payment_json

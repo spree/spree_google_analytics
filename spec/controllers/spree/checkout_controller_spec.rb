@@ -129,6 +129,13 @@ RSpec.describe Spree::CheckoutController do
       }
     end
 
+    let(:user_properties_event_data) do
+      {
+        'sign_in_count' => order.user.sign_in_count,
+        'created_at' => order.user.created_at.iso8601
+      }
+    end
+
     before do
       session[:checkout_completed] = true
     end
@@ -155,7 +162,12 @@ RSpec.describe Spree::CheckoutController do
 
     it 'tracks the user id' do
       complete
-      expect(response.body).to include("gtag('set', { user_id: \"#{order.user_id}\" })")
+      expect(response.body).to include("gtag('set', 'user_id', \"#{order.user_id}\")")
+    end
+
+    it 'tracks the user properties' do
+      complete
+      expect(response.body).to include("gtag('set', 'user_properties', #{user_properties_event_data.to_json});")
     end
 
     it 'clears out the session' do

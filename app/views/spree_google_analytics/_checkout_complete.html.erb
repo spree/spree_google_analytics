@@ -3,8 +3,8 @@
     if (window.gtag) {
       <% safely do %>
         <% if @order.user.present? %>
-          gtag('set', { user_id: "<%= @order.reload.user_id %>" });
-          gtag('set', <%= google_analytics_user_properties_json(@order.user) %>);
+          gtag('set', 'user_id', "<%= @order.reload.user_id %>");
+          gtag('set', 'user_properties', <%= google_analytics_user_properties_json(@order.user) %>);
         <% end %>
 
         gtag('event', 'add_payment_info', <%= google_analytics_payment_json %>);
