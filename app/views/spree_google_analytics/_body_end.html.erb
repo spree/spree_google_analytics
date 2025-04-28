@@ -19,7 +19,7 @@
 
       <% if controller_name == 'search' && action_name == 'show' && query.present? %>
         <% safely do %>
-          gtag('event', 'search', <%= { search_term: query }.to_json.html_safe %>);
+          gtag('event', 'search', <%= raw({ search_term: ERB::Util.html_escape(query) }.to_json) %>);
         <% end %>
       <% end %>
     }
