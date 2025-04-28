@@ -3,7 +3,7 @@ module SpreeGoogleAnalytics
     def call
       {
         currency: @order.currency,
-        value: @order.total&.to_f,
+        value: @order.analytics_subtotal,
         coupon: try_coupon_code,
         items: products(@order)
       }.merge(try_debug_mode)

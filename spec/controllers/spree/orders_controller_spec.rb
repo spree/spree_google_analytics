@@ -10,7 +10,7 @@ RSpec.describe Spree::OrdersController do
   let(:event_data) do
     {
       'currency' => 'USD',
-      'value' => order.total.to_f,
+      'value' => order.item_total.to_f,
       'coupon' => '',
       'items' => [
         {

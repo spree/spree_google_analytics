@@ -83,7 +83,7 @@ RSpec.describe Spree::CheckoutController do
       let(:add_shipping_info_event_data) do
         {
           'currency' => 'USD',
-          'value' => order.total.to_f,
+          'value' => order.item_total.to_f,
           'coupon' => '',
           'items' => [begin_checkout_event_data['items'].first],
           'shipping_tier' => shipping_method.name
@@ -110,7 +110,7 @@ RSpec.describe Spree::CheckoutController do
     let(:add_payment_info_event_data) do
       {
         'currency' => 'USD',
-        'value' => order.total.to_f,
+        'value' => order.item_total.to_f,
         'coupon' => '',
         'items' => [item_data],
         'payment_type' => payment.payment_method.name
