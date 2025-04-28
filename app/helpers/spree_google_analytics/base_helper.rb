@@ -48,7 +48,7 @@ module SpreeGoogleAnalytics
     def google_analytics_cart_event_json(line_item, quantity, position)
       {
         currency: line_item.currency,
-        value: (line_item.price * quantity).to_f,
+        value: line_item.amount.to_f,
         items: [
           SpreeGoogleAnalytics::ProductPresenter.new(
             resource: line_item,

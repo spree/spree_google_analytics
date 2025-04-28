@@ -6,8 +6,7 @@ module SpreeGoogleAnalytics
         value: @order.total&.to_f,
         coupon: try_coupon_code,
         items: products(@order)
-      }.merge(try_debug_mode).
-        merge(try_session_id)
+      }.merge(try_debug_mode)
     end
   end
 end

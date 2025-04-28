@@ -7,6 +7,7 @@ RSpec.describe SpreeGoogleAnalytics::OrderPresenter do
   let(:line_item) { order.line_items.first }
 
   before do
+    order.update_column(:ship_total, 100)
     line_item.update_column(:promo_total, 5)
   end
 
@@ -16,7 +17,7 @@ RSpec.describe SpreeGoogleAnalytics::OrderPresenter do
       transaction_id: order.number,
       value: 15,
       tax: order.additional_tax_total&.to_f,
-      shipping: order.shipments.sum(&:cost).to_f,
+      shipping: 100.0,
       coupon: order.coupon_code.to_s,
       items: [
         {
