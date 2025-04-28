@@ -1,4 +1,4 @@
-<% if store_integration('google_analytics').present? %>
+<% if store_integration('google_analytics').present? && @wished_item&.variant.present? %>
   <script>
     if (window.gtag) {
       <% safely do %>

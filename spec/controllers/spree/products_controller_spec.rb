@@ -3,19 +3,20 @@ require 'spec_helper'
 RSpec.describe Spree::ProductsController do
   render_views
 
-  let(:product) { create(:product, stores: [Spree::Store.default]) }
+  let(:store){ Spree::Store.default }
+  let(:product) { create(:product, stores: [store]) }
 
   let(:event_data) do
     {
       'currency' => 'USD',
-      'value' => product.price,
+      'value' => product.price.to_f,
       'items' => [
         {
           'item_id' => product.sku,
           'item_name' => product.name,
           'affiliation' => store.name,
           'discount' => 0.0,
-          'index' => '1',
+          'index' => '',
           'item_brand' => '',
           'item_category' => '',
           'item_category2' => '',
@@ -27,8 +28,7 @@ RSpec.describe Spree::ProductsController do
           'item_variant' => '',
           'location_id' => '',
           'price' => product.price.to_f,
-          'quantity' => 1,
-          'coupon' => ''
+          'quantity' => 1
         }
       ]
     }
@@ -53,7 +53,7 @@ RSpec.describe Spree::ProductsController do
 
     it 'tracks the product view event' do
       show
-      expect(response.body).to include("gtag('event', 'view_item'")
+      expect(response.body).to include("gtag('event', 'view_item', #{event_data.to_json});")
     end
   end
 end

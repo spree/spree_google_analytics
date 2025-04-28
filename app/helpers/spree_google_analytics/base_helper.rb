@@ -34,7 +34,7 @@ module SpreeGoogleAnalytics
 
       {
         currency: current_currency,
-        value: variant.amount_in(current_currency),
+        value: variant.amount_in(current_currency).to_f,
         items: [
           SpreeGoogleAnalytics::ProductPresenter.new(
             store_name: current_store.name,

@@ -3,13 +3,15 @@ require 'spec_helper'
 RSpec.describe Spree::OrdersController do
   render_views
 
+  let(:store) { Spree::Store.default }
   let(:order) { create(:order_with_totals) }
   let(:line_item) { order.line_items.first }
 
   let(:event_data) do
     {
       'currency' => 'USD',
-      'value' => order.total,
+      'value' => order.total.to_f,
+      'coupon' => '',
       'items' => [
         {
           'item_id' => line_item.variant.sku,
@@ -54,7 +56,7 @@ RSpec.describe Spree::OrdersController do
 
     it 'tracks the view cart event' do
       edit
-      expect(response.body).to include("gtag('event', 'view_cart'")
+      expect(response.body).to include("gtag('event', 'view_cart', #{event_data.to_json});")
     end
   end
 end

@@ -4,7 +4,6 @@ module SpreeGoogleAnalytics
 
     def initialize(order:)
       @order = order
-      @products = products(order)
     end
 
     def call
@@ -45,19 +44,15 @@ module SpreeGoogleAnalytics
       (@order.coupon_code || @order.try(:gift_card).try(:code)).to_s
     end
 
-    def should_attach_gift_card?
-      true
-    end
-
     def gift_card_attributes
-      return {} unless should_attach_gift_card?
       return {} unless defined?(Spree::GiftCard)
+      return {} unless @order.gift_card.present?
 
       {
         gift_card_code: @order.gift_card&.code.to_s.upcase,
         gift_card_amount: @order.gift_card_total.to_f,
         gift_card_balance: @order.gift_card&.amount_remaining.to_f,
-        total_minus_store_credits: @order.total_minus_store_credits.to_f,
+        total_minus_store_credits: @order.total_minus_store_credits.to_f
       }
     end
   end

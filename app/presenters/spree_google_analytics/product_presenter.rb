@@ -19,10 +19,10 @@ module SpreeGoogleAnalytics
       {
         item_id: @resource.sku.presence || @resource.product_id,
         item_name: @resource.name,
-        affiliation: @resource.respond_to?(:order) ? @resource.order.store.name : @store_name,
+        affiliation: @resource.respond_to?(:order) && @resource.order&.store.present? ? @resource.order.store.name : @store_name,
         discount: 0.00,
         index: @position.to_s,
-        item_brand: brand_name(@resource.product).to_s,
+        item_brand: @resource.product.present? ? brand_name(@resource.product).to_s : '',
         item_category: taxons[0].to_s,
         item_category2: taxons[1].to_s,
         item_category3: taxons[2].to_s,
