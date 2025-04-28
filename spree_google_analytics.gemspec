@@ -11,8 +11,8 @@ Gem::Specification.new do |s|
   s.summary     = "Spree Commerce Google analytics Extension"
   s.required_ruby_version = '>= 3.0'
 
-  s.author    = 'You'
-  s.email     = 'you@example.com'
+  s.author    = 'Vendo Connect Inc.'
+  s.email     = 'hello@spreecommerce.org'
   s.homepage  = 'https://github.com/your-github-handle/spree_google_analytics'
   s.license = 'AGPL-3.0-or-later'
 
