@@ -45,7 +45,6 @@ module SpreeGoogleAnalytics
     end
 
     def gift_card_attributes
-      return {} unless defined?(Spree::GiftCard)
       return {} unless @order.gift_card.present?
 
       {
