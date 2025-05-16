@@ -8,11 +8,8 @@
       <% end %>
 
       <%= preference_field(@integration, form, 'measurement_id', i18n_scope: 'admin.integrations.google_analytics') %>
-      <p class="mb-0 mt-n2">
-        <%= link_to 'https://support.google.com/analytics/answer/12270356', target: "_blank", class: 'btn btn-link' do %>
-          Where to find my Measurement ID?
-          <%= icon('external-link', class: 'ml-2 mr-0') %>
-        <% end %>
+      <p class="mb-0 mt-2">
+        <%= external_link_to 'Where to find my Measurement ID?', 'https://support.google.com/analytics/answer/12270356' %>
       </p>
     </div>
   </div>
