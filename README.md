@@ -20,6 +20,10 @@ This is a Google analytics extension for [Spree Commerce](https://spreecommerce.
 
   If your server was running, restart it so that it can find the assets properly.
 
+## Setup
+
+Please follow [our setup guide](https://spreecommerce.org/docs/integrations/analytics/google-analytics) to start tracking all events in Google Analytics dashboard.
+
 ## Developing
 
 1. Create a dummy app
