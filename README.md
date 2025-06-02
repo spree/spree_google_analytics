@@ -1,6 +1,31 @@
-# Spree Google analytics
+# Google Analytics 4 integration for Spree Commerce
 
-This is a Google analytics extension for [Spree Commerce](https://spreecommerce.org), an open source e-commerce platform built with Ruby on Rails.
+This is a Google Analytics 4 extension for [Spree Commerce](https://spreecommerce.org) - the [open-source eCommerce platform](https://spreecommerce.org) for [Rails](https://spreecommerce.org/category/ruby-on-rails/). 
+
+This [Google Analytics 4 integration for Spree Commerce](https://spreecommerce.org/docs/integrations/analytics/google-analytics) allows you to track user behavior, sales performance, and marketing effectiveness across your store. 
+
+With minimal setup required, you can gain valuable insights into how visitors interact with your site, which can help you make informed decisions to improve conversions, user experience, and overall business strategy.
+
+> [!NOTE]
+> To set up the Google Analytics integration, you must have a Google Analytics account and an associated property.
+
+## Event Tracking
+
+By default, the following events will be tracked in Google Analytics 4:
+- page_view
+- first_visit
+- session_start
+- user_engagement
+- search
+- add_payment_info
+- add_shipping_info
+- add_to_cart
+- add_to_wishlist
+- begin_checkout
+- purchase
+- remove_from_cart
+- view_cart
+- view_item
 
 ## Installation
 
@@ -63,3 +88,15 @@ If you'd like to contribute, please take a look at the
 pull request.
 
 Copyright (c) 2025 [name of extension creator], released under the New BSD License
+
+## Join the Community 
+
+[Join our Slack](https://slack.spreecommerce.org) to meet other 6k+ community members and get some support.
+
+## Need more support?
+
+[Contact us](https://spreecommerce.org/contact/) for enterprise support and custom development services. We offer:
+  * migrations and upgrades,
+  * delivering your Spree application,
+  * optimizing your Spree stack.
+
