@@ -1,27 +1,61 @@
 <% if store_integration('google_analytics').present? %>
-  <script>
-    if (window.gtag) {
-      <% if controller_name == 'checkout' %>
-        <% if @order && session[:checkout_started] %>
-          <% safely do %>
-            gtag('event', 'begin_checkout', <%= google_analytics_checkout_json %>);
+  <% if use_gtm? %>
+    <script>
+      if (window.dataLayer) {
+        <% if controller_name == 'checkout' %>
+          <% if @order && session[:checkout_started] %>
+            <% safely do %>
+              dataLayer.push(<%= google_analytics_checkout_json %>);
+            <% end %>
           <% end %>
-        <% end %>
 
-        <% if @order && session[:checkout_step_completed] == 'delivery' %>
-          <% safely do %>
-            <% @order.shipments.each do |shipment| %>
-              gtag('event', 'add_shipping_info', <%= google_analytics_add_shipping_info_json(shipment) %>);
+          <% if @order && session[:checkout_step_completed] == 'delivery' %>
+            <% safely do %>
+              <% @order.shipments.each do |shipment| %>
+                dataLayer.push({
+                  event: 'add_shipping_info',
+                  ecommerce: <%= google_analytics_add_shipping_info_json(shipment) %>
+                });
+              <% end %>
             <% end %>
           <% end %>
         <% end %>
-      <% end %>
 
-      <% if controller_name == 'search' && action_name == 'show' && query.present? %>
-        <% safely do %>
-          gtag('event', 'search', <%= raw({ search_term: ERB::Util.html_escape(query) }.to_json) %>);
+        <% if controller_name == 'search' && action_name == 'show' && query.present? %>
+          <% safely do %>
+            dataLayer.push({
+              event: 'search',
+              search_term: "<%= ERB::Util.html_escape(query) %>"
+            });
+          <% end %>
         <% end %>
-      <% end %>
-    }
-  </script>
+      }
+    </script>
+  <% else %>
+    <script>
+      if (window.gtag) {
+        <% if controller_name == 'checkout' %>
+          <% if @order && session[:checkout_started] %>
+            <% safely do %>
+              gtag('event', 'begin_checkout', <%= google_analytics_checkout_json %>);
+            <% end %>
+          <% end %>
+
+          <% if @order && session[:checkout_step_completed] == 'delivery' %>
+            <% safely do %>
+              <% @order.shipments.each do |shipment| %>
+                gtag('event', 'add_shipping_info', <%= google_analytics_add_shipping_info_json(shipment) %>);
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+
+        <% if controller_name == 'search' && action_name == 'show' && query.present? %>
+          <% safely do %>
+            gtag('event', 'search', <%= raw({ search_term: ERB::Util.html_escape(query) }.to_json) %>);
+          <% end %>
+        <% end %>
+      }
+    </script>
+  <% end %>
 <% end %>

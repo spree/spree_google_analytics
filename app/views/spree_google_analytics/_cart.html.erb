@@ -1,11 +1,19 @@
 <% if store_integration('google_analytics').present? %>
   <script>
-    if (window.gtag) {
-      <% if @order.present? && @line_items.any? %>
-        window.addEventListener('slideover:open', () => {
-          gtag('event', 'view_cart', <%= google_analytics_checkout_json %>);
-        })
+    <% if @order.present? && @line_items.any? %>
+      <% if use_gtm? %>
+        if (window.dataLayer) {
+          window.addEventListener('slideover:open', () => {
+            dataLayer.push(<%= google_analytics_view_cart_json %>);
+          })
+        }
+      <% else %>
+        if (window.gtag) {
+          window.addEventListener('slideover:open', () => {
+            gtag('event', 'view_cart', <%= google_analytics_view_cart_json %>);
+          })
+        }
       <% end %>
-    }
+    <% end %>
   </script>
 <% end %>

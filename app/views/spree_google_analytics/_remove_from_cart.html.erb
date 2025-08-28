@@ -1,9 +1,15 @@
 <% if store_integration('google_analytics').present? %>
   <script>
-    if (window.gtag) {
-      <% safely do %>
-        gtag('event', 'remove_from_cart', <%= google_analytics_cart_event_json(@line_item, @line_item.quantity, nil) %>);
+    <% safely do %>
+      <% if use_gtm? %>
+        if (window.dataLayer) {
+          dataLayer.push(<%= google_analytics_remove_from_cart_event_json(@line_item, @line_item.quantity, nil) %>);
+        }
+      <% else %>
+        if (window.gtag) {
+          gtag('event', 'remove_from_cart', <%= google_analytics_remove_from_cart_event_json(@line_item, @line_item.quantity, nil) %>);
+        }
       <% end %>
-    }
+    <% end %>
   </script>
 <% end %>

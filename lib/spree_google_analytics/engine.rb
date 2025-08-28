@@ -14,7 +14,16 @@ module SpreeGoogleAnalytics
     end
 
     initializer 'spree_google_analytics.assets' do |app|
+      app.config.assets.paths << root.join('app/javascript')
+      app.config.assets.paths << root.join('vendor/javascript')
+      app.config.assets.paths << root.join('vendor/stylesheets')
       app.config.assets.precompile += %w[spree_google_analytics_manifest]
+    end
+
+    initializer 'spree_google_analytics.importmap', before: 'importmap' do |app|
+      app.config.importmap.paths << root.join('config/importmap.rb')
+      # https://github.com/rails/importmap-rails?tab=readme-ov-file#sweeping-the-cache-in-development-and-test
+      app.config.importmap.cache_sweepers << root.join('app/javascript')
     end
 
     def self.activate

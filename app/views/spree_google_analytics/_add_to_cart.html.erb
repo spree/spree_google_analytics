@@ -1,9 +1,15 @@
 <% if store_integration('google_analytics').present? %>
   <script>
-    if (window.gtag) {
-      <% safely do %>
-        gtag('event', 'add_to_cart', <%= google_analytics_cart_event_json(@line_item, @line_item.quantity, @order.line_items.pluck(:id).index(@line_item.id) + 1) %>);
+    <% safely do %>
+      <% if use_gtm? %>
+        if (window.dataLayer) {
+          dataLayer.push(<%= google_analytics_cart_event_json(@line_item, @line_item.quantity, @order.line_items.pluck(:id).index(@line_item.id) + 1) %>);
+        }
+      <% else %>
+        if (window.gtag) {
+          gtag('event', 'add_to_cart', <%= google_analytics_cart_event_json(@line_item, @line_item.quantity, @order.line_items.pluck(:id).index(@line_item.id) + 1) %>);
+        }
       <% end %>
-    }
+    <% end %>
   </script>
 <% end %>
