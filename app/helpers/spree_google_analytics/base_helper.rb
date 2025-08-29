@@ -1,7 +1,7 @@
 module SpreeGoogleAnalytics
   module BaseHelper
     def google_analytics_client_type
-      @google_analytics_client_type ||= store_integration('google_analytics')&.preferred_client || SpreeGoogleAnalytics::Config.client
+      @google_analytics_client_type ||= store_integration('google_analytics')&.preferred_client
     end
 
     def use_gtm?
