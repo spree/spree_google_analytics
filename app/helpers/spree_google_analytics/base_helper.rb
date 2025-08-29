@@ -69,7 +69,7 @@ module SpreeGoogleAnalytics
       else
         {
           currency: line_item.currency,
-          value: line_item.amount.to_f,
+          value: (line_item.price.to_f * quantity.to_i),
           items: [
             SpreeGoogleAnalytics::ProductPresenter.new(
               resource: line_item,
