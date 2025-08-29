@@ -69,7 +69,7 @@ module SpreeGoogleAnalytics
       else
         {
           currency: line_item.currency,
-          value: (line_item.price.to_f * quantity.to_i),
+          value: line_item.amount,
           items: [
             SpreeGoogleAnalytics::ProductPresenter.new(
               resource: line_item,
@@ -86,7 +86,7 @@ module SpreeGoogleAnalytics
         event: 'add_to_cart',
         ecommerce: {
           currency: line_item.currency,
-          value: (line_item.price.to_f * quantity.to_i),
+          value: line_item.amount,
           items: [
             SpreeGoogleAnalytics::ProductPresenter.new(
               resource: line_item,
