@@ -1,0 +1,6 @@
+<% if store_integration('google_analytics').present? && use_gtm? %>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=<%= store_integration('google_analytics').preferred_google_tag_manager_id %>"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+<% end %>

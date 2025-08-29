@@ -1,15 +1,29 @@
 <% if store_integration('google_analytics').present? %>
   <script>
-    if (window.gtag) {
-      <% safely do %>
-        <% if @order.user.present? %>
-          gtag('set', 'user_id', "<%= @order.reload.user_id %>");
-          gtag('set', 'user_properties', <%= google_analytics_user_properties_json(@order.user) %>);
-        <% end %>
+    <% safely do %>
+      <% if use_gtm? %>
+        if (window.dataLayer) {
+          <% if @order.user.present? %>
+            dataLayer.push({
+              user_id: "<%= @order.reload.user_id %>",
+              user_properties: <%= google_analytics_user_properties_json(@order.user) %>
+            });
+          <% end %>
 
-        gtag('event', 'add_payment_info', <%= google_analytics_payment_json %>);
-        gtag('event', 'purchase', <%= google_analytics_purchase_json %>);
+          dataLayer.push(<%= google_analytics_payment_json %>);
+          dataLayer.push(<%= google_analytics_purchase_json %>);
+        }
+      <% else %>
+        if (window.gtag) {
+          <% if @order.user.present? %>
+            gtag('set', 'user_id', "<%= @order.reload.user_id %>");
+            gtag('set', 'user_properties', <%= google_analytics_user_properties_json(@order.user) %>);
+          <% end %>
+
+          gtag('event', 'add_payment_info', <%= google_analytics_payment_json %>);
+          gtag('event', 'purchase', <%= google_analytics_purchase_json %>);
+        }
       <% end %>
-    }
+    <% end %>
   </script>
 <% end %>

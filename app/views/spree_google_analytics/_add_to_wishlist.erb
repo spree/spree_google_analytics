@@ -1,9 +1,15 @@
 <% if store_integration('google_analytics').present? && @wished_item&.variant.present? %>
   <script>
-    if (window.gtag) {
-      <% safely do %>
-        gtag('event', 'add_to_wishlist', <%= google_analytics_add_to_wishlist_event_json(@wished_item.variant) %>);
+    <% safely do %>
+      <% if use_gtm? %>
+        if (window.dataLayer) {
+          dataLayer.push(<%= google_analytics_add_to_wishlist_event_json(@wished_item.variant) %>);
+        }
+      <% else %>
+        if (window.gtag) {
+          gtag('event', 'add_to_wishlist', <%= google_analytics_add_to_wishlist_event_json(@wished_item.variant) %>);
+        }
       <% end %>
-    }
+    <% end %>
   </script>
 <% end %>

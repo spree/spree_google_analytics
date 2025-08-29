@@ -3,6 +3,7 @@ Rails.application.config.after_initialize do
 
   if Rails.application.config.respond_to?(:spree_storefront)
     Rails.application.config.spree_storefront.head_partials << 'spree_google_analytics/head'
+    Rails.application.config.spree_storefront.body_start_partials << 'spree_google_analytics/body_start'
     Rails.application.config.spree_storefront.body_end_partials << 'spree_google_analytics/body_end'
 
     Rails.application.config.spree_storefront.cart_partials << 'spree_google_analytics/cart'

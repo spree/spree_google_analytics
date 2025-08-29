@@ -8,3 +8,6 @@ en:
           reports_warning: It can take up to 48 hours for the data to appear in standard reports
           measurement_id: Measurement ID
           api_secret: API Secret
+          google_tag_manager_id: Google Tag Manager ID
+          client: Client Type
+          client_help: Choose between Google Analytics 4 (direct gtag.js implementation) or Google Tag Manager (dataLayer events)
