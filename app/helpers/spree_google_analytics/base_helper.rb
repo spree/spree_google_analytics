@@ -69,7 +69,7 @@ module SpreeGoogleAnalytics
       else
         {
           currency: line_item.currency,
-          value: line_item.amount,
+          value: line_item.amount.to_f,
           items: [
             SpreeGoogleAnalytics::ProductPresenter.new(
               resource: line_item,
@@ -86,7 +86,7 @@ module SpreeGoogleAnalytics
         event: 'add_to_cart',
         ecommerce: {
           currency: line_item.currency,
-          value: line_item.amount,
+          value: line_item.amount.to_f,
           items: [
             SpreeGoogleAnalytics::ProductPresenter.new(
               resource: line_item,
@@ -215,7 +215,7 @@ module SpreeGoogleAnalytics
       if use_gtm?
         google_analytics_gtm_view_cart_json
       else
-        @google_analytics_checkout_json ||= SpreeGoogleAnalytics::CheckoutPresenter.new(order: @order).call.to_json.html_safe
+        @google_analytics_view_cart_json ||= SpreeGoogleAnalytics::CheckoutPresenter.new(order: @order).call.to_json.html_safe
       end
     end
 
