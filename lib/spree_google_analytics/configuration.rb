@@ -9,7 +9,5 @@ module SpreeGoogleAnalytics
    # preference :color, :string, default: 'Red'
    # preference :favorite_number, :integer
    # preference :supported_locales, :array, default: [:en]
-
-   preference :client, :string, default: 'ga4'
   end
 end
