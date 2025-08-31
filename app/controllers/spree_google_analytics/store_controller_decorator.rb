@@ -10,11 +10,11 @@ Spree::StoreController.prepend(SpreeGoogleAnalytics::StoreControllerDecorator) i
 
 # include in Devise controllers
 if defined?(Spree::UserSessionsController)
-  Spree::UserSessionsController.prepend(SpreeGoogleAnalytics::UserSessionsControllerDecorator)
+  Spree::UserSessionsController.prepend(SpreeGoogleAnalytics::StoreControllerDecorator)
 end
 if defined?(Spree::UserRegistrationsController)
-  Spree::UserRegistrationsController.prepend(SpreeGoogleAnalytics::UserRegistrationsControllerDecorator)
+  Spree::UserRegistrationsController.prepend(SpreeGoogleAnalytics::StoreControllerDecorator)
 end
 if defined?(Spree::UserPasswordsController)
-  Spree::UserPasswordsController.prepend(SpreeGoogleAnalytics::UserPasswordsControllerDecorator)
+  Spree::UserPasswordsController.prepend(SpreeGoogleAnalytics::StoreControllerDecorator)
 end
