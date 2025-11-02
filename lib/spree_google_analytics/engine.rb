@@ -14,10 +14,12 @@ module SpreeGoogleAnalytics
     end
 
     initializer 'spree_google_analytics.assets' do |app|
-      app.config.assets.paths << root.join('app/javascript')
-      app.config.assets.paths << root.join('vendor/javascript')
-      app.config.assets.paths << root.join('vendor/stylesheets')
-      app.config.assets.precompile += %w[spree_google_analytics_manifest]
+      if app.config.respond_to?(:assets)
+        app.config.assets.paths << root.join('app/javascript')
+        app.config.assets.paths << root.join('vendor/javascript')
+        app.config.assets.paths << root.join('vendor/stylesheets')
+        app.config.assets.precompile += %w[spree_google_analytics_manifest]
+      end
     end
 
     initializer 'spree_google_analytics.importmap', before: 'importmap' do |app|
