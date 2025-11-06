@@ -1,18 +1,22 @@
 <div class="card mb-4">
-  <div class="card-body">
+  <div class="card-body" data-controller="reveal">
     <% if @integration.persisted? %>
       <div class="alert alert-warning">
         <%= Spree.t('admin.integrations.google_analytics.reports_warning') %>
       </div>
     <% end %>
 
-    <%= form.spree_collection_select "preferred_client", [['Google Analytics 4', 'ga4'], ['Google Tag Manager', 'gtm']], :last, :first, { selected: @integration.preferred_client, label: Spree.t('admin.integrations.google_analytics.client'), help: Spree.t('admin.integrations.google_analytics.client_help') } %>
+    <%= form.spree_collection_select "preferred_client", [['Google Analytics 4', 'ga4'], ['Google Tag Manager', 'gtm']], :last, :first, { selected: @integration.preferred_client, label: Spree.t('admin.integrations.google_analytics.client'), help: Spree.t('admin.integrations.google_analytics.client_help') }, { data: { action: 'change->reveal#toggle' } } %>
 
-    <%= preference_field(@integration, form, 'measurement_id', i18n_scope: 'admin.integrations.google_analytics') %>
-    <%= external_link_to 'Where to find my Measurement ID?', 'https://support.google.com/analytics/answer/12270356' %>
+    <div data-reveal-target="item">
+      <%= preference_field(@integration, form, 'measurement_id', i18n_scope: 'admin.integrations.google_analytics') %>
+      <%= external_link_to 'Where to find my Measurement ID?', 'https://support.google.com/analytics/answer/12270356' %>
+    </div>
 
-    <%= preference_field(@integration, form, 'google_tag_manager_id', i18n_scope: 'admin.integrations.google_analytics') %>
-    <%= external_link_to 'Where to find my Google Tag Manager ID?', 'https://support.google.com/tagmanager/answer/6107028' %>
+    <div class="hidden" data-reveal-target="item">
+      <%= preference_field(@integration, form, 'google_tag_manager_id', i18n_scope: 'admin.integrations.google_analytics') %>
+      <%= external_link_to 'Where to find my Google Tag Manager ID?', 'https://support.google.com/tagmanager/answer/6107028' %>
+      </div>
   </div>
 </div>
 
