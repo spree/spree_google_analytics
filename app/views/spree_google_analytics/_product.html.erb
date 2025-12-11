@@ -1,13 +1,15 @@
 <% if store_integration('google_analytics').present? %>
-  <script>
-    <% if use_gtm? %>
-      if (window.dataLayer) {
-        dataLayer.push(<%= google_analytics_view_item_json %>);
-      }
-    <% else %>
-      if (window.gtag) {
-        gtag('event', 'view_item', <%= google_analytics_view_item_json %>);
-      }
-    <% end %>
-  </script>
+  <% cache [spree_base_cache_key, @product, @selected_variant].compact do %>
+    <script>
+      <% if use_gtm? %>
+        if (window.dataLayer) {
+          dataLayer.push(<%= google_analytics_view_item_json %>);
+        }
+      <% else %>
+        if (window.gtag) {
+          gtag('event', 'view_item', <%= google_analytics_view_item_json %>);
+        }
+      <% end %>
+    </script>
+  <% end %>
 <% end %>
