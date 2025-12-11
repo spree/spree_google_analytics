@@ -1,21 +1,25 @@
-<% if store_integration('google_analytics').present? %>
+<% integration = store_integration('google_analytics') %>
+
+<% if integration.present? %>
   <% if use_gtm? %>
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','<%= store_integration('google_analytics').preferred_google_tag_manager_id %>');</script>
+    })(window,document,'script','dataLayer','<%= integration.preferred_google_tag_manager_id %>');</script>
     <!-- End Google Tag Manager -->
     
     <script>
       window.dataLayer = window.dataLayer || [];
       
       <% if try_spree_current_user %>
-        dataLayer.push({
-          user_id: "<%= try_spree_current_user.id %>",
-          user_properties: <%= google_analytics_user_properties_json(try_spree_current_user) %>
-        });
+        <% cache try_spree_current_user, expires_in: 1.hour do %>
+          dataLayer.push({
+            user_id: "<%= try_spree_current_user.id %>",
+            user_properties: <%= google_analytics_user_properties_json(try_spree_current_user) %>
+          });
+        <% end %>
       <% end %>
     </script>
   <% else %>
@@ -25,20 +29,8 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
 
-      <% if defined?(store_integration('cookie_first')) && store_integration('cookie_first').present? %>
-        gtag('consent', 'default', {
-        'ad_storage': 'denied',
-        'ad_user_data': 'denied',
-        'ad_personalization': 'denied',
-        'analytics_storage': 'denied',
-        'functionality_storage': 'denied',
-        'security_storage': 'granted',
-        'wait_for_update': 2000
-        });
-      <% end %>
-
       gtag('js', new Date());
-      GA_MEASUREMENT_ID = "<%= store_integration('google_analytics').preferred_measurement_id %>";
+      GA_MEASUREMENT_ID = "<%= integration.preferred_measurement_id %>";
 
       <% if ENV['GA_DEBUG_MODE'].present? %>
         gtag('config', GA_MEASUREMENT_ID, { "debug_mode": true });
@@ -47,8 +39,10 @@
       <% end %>
 
       <% if try_spree_current_user %>
-        gtag('set', 'user_id', "<%= try_spree_current_user.id %>");
-        gtag('set', 'user_properties', <%= google_analytics_user_properties_json(try_spree_current_user) %>);
+        <% cache try_spree_current_user, expires_in: 1.hour do %>
+          gtag('set', 'user_id', "<%= try_spree_current_user.id %>");
+          gtag('set', 'user_properties', <%= google_analytics_user_properties_json(try_spree_current_user) %>);
+        <% end %>
       <% end %>
     </script>
   <% end %>
