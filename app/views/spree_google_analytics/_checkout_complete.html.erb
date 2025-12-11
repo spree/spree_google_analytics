@@ -3,9 +3,9 @@
     <% safely do %>
       <% if use_gtm? %>
         if (window.dataLayer) {
-          <% if @order.user.present? %>
+          <% if @order.user.present? && !try_spree_current_user %>
             dataLayer.push({
-              user_id: "<%= @order.reload.user_id %>",
+              user_id: "<%= @order.user_id %>",
               user_properties: <%= google_analytics_user_properties_json(@order.user) %>
             });
           <% end %>
@@ -15,8 +15,8 @@
         }
       <% else %>
         if (window.gtag) {
-          <% if @order.user.present? %>
-            gtag('set', 'user_id', "<%= @order.reload.user_id %>");
+          <% if @order.user.present? && !try_spree_current_user %>
+            gtag('set', 'user_id', "<%= @order.user_id %>");
             gtag('set', 'user_properties', <%= google_analytics_user_properties_json(@order.user) %>);
           <% end %>
 
