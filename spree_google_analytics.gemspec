@@ -14,15 +14,20 @@ Gem::Specification.new do |s|
   s.author    = 'Vendo Connect Inc.'
   s.email     = 'hello@spreecommerce.org'
   s.homepage  = 'https://github.com/spree/spree_google_analytics'
-  s.license = 'AGPL-3.0-or-later'
+  s.license   = 'MIT'
 
-  s.files        = Dir["{app,config,db,lib,vendor}/**/{*,.*}", "LICENSE.md", "Rakefile", "README.md"].reject { |f| f.match(/^spec/) && !f.match(/^spec\/fixtures/) }
+  s.metadata = {
+    'bug_tracker_uri' => 'https://github.com/spree/spree_google_analytics/issues',
+    'changelog_uri' => "https://github.com/spree/spree_google_analytics/releases/tag/v#{s.version}",
+    'documentation_uri' => 'https://docs.spreecommerce.org/',
+    'source_code_uri' => "https://github.com/spree/spree_google_analytics/tree/v#{s.version}"
+  }
+
+  s.files        = Dir["{app,config,db,lib,vendor}/**/{*,.*}", "LICENSE", "Rakefile", "README.md"].reject { |f| f.match(/^spec/) && !f.match(/^spec\/fixtures/) }
   s.require_path = 'lib'
   s.requirements << 'none'
 
   spree_opts = '>= 5.1.0'
   s.add_dependency 'spree', spree_opts
-  s.add_dependency 'spree_storefront', spree_opts
   s.add_dependency 'spree_admin', spree_opts
-  s.add_dependency 'spree_extension'
 end

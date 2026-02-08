@@ -17,5 +17,8 @@ end
 desc 'Generates a dummy app for testing'
 task :test_app do
   ENV['LIB_NAME'] = 'spree_google_analytics'
-  Rake::Task['extension:test_app'].invoke
+  Rake::Task['extension:test_app'].execute(
+    install_storefront: true,
+    install_admin: true
+  )
 end
