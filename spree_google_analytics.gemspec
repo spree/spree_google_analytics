@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.summary     = "Spree Commerce Google analytics Extension"
   s.required_ruby_version = '>= 3.0'
 
-  s.author    = 'Vendo Connect Inc.'
+  s.author    = 'Vendo Connect Inc., Vendo Sp. z o.o.'
   s.email     = 'hello@spreecommerce.org'
   s.homepage  = 'https://github.com/spree/spree_google_analytics'
   s.license   = 'MIT'

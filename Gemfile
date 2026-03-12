@@ -11,13 +11,16 @@ gem 'rails-controller-testing'
 spree_opts = if ENV['SPREE_PATH']
                 { 'path': ENV['SPREE_PATH'] }
              else
-                { 'github': 'spree/spree', 'branch': 'main', 'glob': 'backend/engines/**/*.gemspec' }
+                { 'github': 'spree/spree', 'branch': 'main', 'glob': 'spree/**/*.gemspec' }
              end
 gem 'spree', spree_opts
 gem 'spree_admin', spree_opts
 
-gem 'spree_storefront'
-gem 'spree_page_builder'
+gem 'spree_posts', { github: 'spree/spree-posts', branch: 'main' }
+
+spree_storefront_opts = { github: 'spree/spree-rails-storefront', branch: 'main', glob: '**/*.gemspec' }
+gem 'spree_storefront', spree_storefront_opts
+gem 'spree_page_builder', spree_storefront_opts
 
 if ENV['DB'] == 'mysql'
   gem 'mysql2'
