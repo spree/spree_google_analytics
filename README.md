@@ -1,6 +1,10 @@
+> [!NOTE]
+> For users using our default headless [storefront](https://github.com/spree/storefront), you don't need to install this extension, follow [Storefront README](https://github.com/spree/storefront) to setup GA/GTM via ENV variables.
+
+
 # Google Analytics 4 integration for Spree Commerce
 
-This is a Google Analytics 4 extension for [Spree Commerce](https://spreecommerce.org) - the [open-source eCommerce platform](https://spreecommerce.org) for [Rails](https://spreecommerce.org/category/ruby-on-rails/). 
+This is a Google Analytics 4 extension for [Spree Rails Storefront](https://github.com/spree/spree-rails-storefront).
 
 This [Google Analytics 4 integration for Spree Commerce](https://spreecommerce.org/docs/integrations/analytics/google-analytics) allows you to track user behavior, sales performance, and marketing effectiveness across your store. 
 
@@ -87,7 +91,7 @@ If you'd like to contribute, please take a look at the
 [instructions](CONTRIBUTING.md) for installing dependencies and crafting a good
 pull request.
 
-Copyright (c) 2025 [name of extension creator], released under the New BSD License
+Copyright (c) 2025 Vendo Connect Inc., Vendo Sp. z o.o., released under the MIT License
 
 ## Join the Community 
 
@@ -99,4 +103,3 @@ Copyright (c) 2025 [name of extension creator], released under the New BSD Licen
   * migrations and upgrades,
   * delivering your Spree application,
   * optimizing your Spree stack.
-

@@ -21,4 +21,5 @@ task :test_app do
     install_storefront: true,
     install_admin: true
   )
+  system({ 'BUNDLE_GEMFILE' => File.expand_path('Gemfile', __dir__) }, 'bundle exec rails g spree_posts:install')
 end
